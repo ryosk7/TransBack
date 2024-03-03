@@ -11,25 +11,23 @@
     <div class="dashboard-group__can-be-donated-left-time">0時19分時点</div>
   </div>
   <div class="coupons-list">
-    @for (num of [1,2,3,4,5,6]; track 1) {
+    @for (coupon of coupons; track coupon.id) {
     <div class="coupons-list__coupon">
       <div class="coupons-list__coupon__thambnail">
-        <img
-          src="https://s3-alpha-sig.figma.com/img/44c8/6f36/adeeca722e64bf233d774a08dce59de6?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ig7OEPdDyylpDHhN6xU-nAt4t49ioTgC576VPnA~qwRkVeLJW662KCNylbWgKZ8AwW7CStCkbd2YABEOK3mzLFE~cur7~Sv3y2pqWSR90LpXgCxamjwmihOkqSJ9v1SX9koGotTpxotchXIwQfWkwK-EiGdAUrwenGZcmtENWp1E9MaOtG-ODOwMm5zzQkYzKcDYrR8S1Krfgbs9VBJnjTcpqGK1KW2n76yy-T7p5MCTWe5Lpx1hA8NAg0P2sY3yvmADUxpczrFNe8lk3Q~yd9v4oBM2vKv853KU7RuDoKLwGpqcQylTW-weQSEOgqWSl8tP7XMJhqwoZ-CsGk3t~w__"
-        />
+        <img src="coupon.thumbnail" />
       </div>
       <div class="coupons-list__coupon__simple-detail">
         <div class="coupons-list__coupon__simple-detail__organization-name">
-          McDonald's
+          {{ coupon.organization_name }}
         </div>
         <div class="coupons-list__coupon__simple-detail__coupon-title">
-          とろーりチーズとカリカリのベーコンのビックマック
+          {{ coupon.title }}
         </div>
         <div class="coupons-list__coupon__simple-detail__coupon-donate">
           <div
             class="coupons-list__coupon__simple-detail__coupon-donate__price"
           >
-            0.1ETH
+            {{ coupon.price }}ETH
           </div>
           <div
             class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group"

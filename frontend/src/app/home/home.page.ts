@@ -22,9 +22,11 @@ import { CouponService } from '../services/coupon.service';
   ],
 })
 export class HomePage {
+  coupons: any;
+
   constructor(private service: CouponService) {
     this.service.getCoupons().subscribe((data) => {
-      console.log('coupons: ', data);
+      this.coupons = data;
     });
   }
 }
