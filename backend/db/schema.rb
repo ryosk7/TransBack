@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_03_180415) do
   create_table "coupons", force: :cascade do |t|
     t.string "title", null: false
     t.text "detail", null: false
+    t.text "thumbnail", null: false
     t.float "price", null: false
     t.integer "organization_id", null: false
     t.datetime "created_at", null: false
