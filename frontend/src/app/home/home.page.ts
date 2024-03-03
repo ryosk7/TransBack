@@ -6,6 +6,7 @@ import {
   IonContent,
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { CouponService } from '../services/coupon.service';
 
 @Component({
   selector: 'app-home',
@@ -21,5 +22,9 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
   ],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private service: CouponService) {
+    this.service.getCoupons().subscribe((data) => {
+      console.log('coupons: ', data);
+    });
+  }
 }
