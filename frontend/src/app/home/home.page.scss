@@ -1,0 +1,148 @@
+.segment-title {
+  color: var(--text-main, #222);
+  font-family: Inter;
+  font-size: 1.12713rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.03381rem;
+}
+
+.dashboard-group {
+  border-radius: 1.24738rem;
+  height: 16.41569rem;
+  background: var(
+    --bg-accent,
+    linear-gradient(90deg, #ff8b37 0%, #f5444a 100%)
+  );
+  text-align: center;
+  padding-top: 1.36rem;
+  margin: 2.39rem 0.75rem 0;
+  width: 94%;
+  z-index: -1;
+  position: fixed;
+
+  &__title {
+    color: #fff;
+    font-family: Inter;
+    font-size: 0.87038rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.02613rem;
+  }
+
+  &__money-with-union {
+    color: #fff;
+    font-family: Inter;
+    font-size: 1.6175rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.0485rem;
+
+    .money {
+      color: var(--text-contrast, #fff);
+      font-family: Inter;
+      font-size: 2.88469rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.08656rem;
+    }
+  }
+
+  &__can-be-donated-left-time {
+    color: #fff;
+    font-family: Inter;
+    font-size: 0.70663rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.02119rem;
+  }
+}
+
+.coupons-list {
+  background: var(
+    --bg-index,
+    linear-gradient(180deg, rgba(246, 246, 246, 0) 0%, #f6f6f6 8%)
+  );
+  margin-top: 12rem;
+
+  &__coupon {
+    border-radius: 0.74844rem;
+    background: #fff;
+    margin: 0 1.42rem 1.07rem;
+    display: flex;
+
+    &__thambnail {
+      padding: 0.85rem 0 0.85rem 0.85rem;
+
+      img {
+        width: 7.60913rem;
+        height: 7.60913rem;
+        border-radius: 0.49894rem;
+      }
+    }
+
+    &__simple-detail {
+      padding: 0.95rem 0.89rem;
+
+      &__organization-name {
+        color: var(--text-sub, #797979);
+        font-family: Inter;
+        font-size: 0.70488rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.02713rem;
+        margin-bottom: 0.4rem;
+      }
+
+      &__coupon-title {
+        color: var(--text-main, #222);
+        font-family: Inter;
+        font-size: 0.70488rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 143%; /* 1.29394rem */
+        letter-spacing: 0.04525rem;
+        margin-bottom: 0.21rem;
+        height: 3.54138rem;
+      }
+
+      &__coupon-donate {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+
+        &__price {
+          color: var(--text-accent, #fc581c);
+          font-family: Inter;
+          font-size: 0.70488rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: 0.09956rem;
+        }
+
+        &__exchange-button-group {
+          border-radius: 1.27994rem;
+          background: var(--main, #ff581f);
+          padding: 0.62rem;
+
+          &__action-name {
+            color: var(--text-contrast, #fff);
+            font-family: Inter;
+            font-size: 0.6865rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.02063rem;
+          }
+        }
+      }
+    }
+  }
+}
