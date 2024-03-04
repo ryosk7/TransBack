@@ -88,6 +88,7 @@
 
     &__simple-detail {
       padding: 0.95rem 0.89rem;
+      width: 15.13088rem;
 
       &__organization-name {
         color: var(--text-sub, #797979);
@@ -110,6 +111,8 @@
         letter-spacing: 0.04525rem;
         margin-bottom: 0.21rem;
         height: 3.54138rem;
+        width: 10rem;
+        overflow-wrap: break-word;
       }
 
       &__coupon-donate {
