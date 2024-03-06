@@ -17,7 +17,7 @@ coupons =
     {
       title: "とろーりチーズとカリカリのベーコンのビッグマック",
       detail: "とろーりチーズとカリカリのベーコンのビッグマック",
-      thumbnail: "https://www.figma.com/file/6FO1B2lLBCd14Bbvigf4mV/image/44c86f36adeeca722e64bf233d774a08dce59de6",
+      thumbnail: "../../assets/images/coupon-image-1.png",
       price: 0.1,
       organization_id: 1,
       created_at: Time.current,
@@ -26,7 +26,7 @@ coupons =
     {
       title: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
       detail: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
-      thumbnail: "https://www.figma.com/file/6FO1B2lLBCd14Bbvigf4mV/image/2be7a7fafa6747caaeefb65ae63f0aef131a4335",
+      thumbnail: "../../assets/images/coupon-image-2.png",
       price: 0.1,
       organization_id: 2,
       created_at: Time.current,
@@ -35,7 +35,34 @@ coupons =
     {
       title: "冬にピッタリな、カフェラテ。トールサイズ。",
       detail: "冬にピッタリな、カフェラテ。トールサイズ。",
-      thumbnail: "https://www.figma.com/file/6FO1B2lLBCd14Bbvigf4mV/image/461bb26f7d1aa4b0cd5d86dd97bf491f077b9a56",
+      thumbnail: "../../assets/images/coupon-image-3.png",
+      price: 0.1,
+      organization_id: 3,
+      created_at: Time.current,
+      updated_at: Time.current
+    },
+    {
+      title: "とろーりチーズとカリカリのベーコンのビッグマック",
+      detail: "とろーりチーズとカリカリのベーコンのビッグマック",
+      thumbnail: "../../assets/images/coupon-image-1.png",
+      price: 0.1,
+      organization_id: 1,
+      created_at: Time.current,
+      updated_at: Time.current
+    },
+    {
+      title: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
+      detail: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
+      thumbnail: "../../assets/images/coupon-image-2.png",
+      price: 0.1,
+      organization_id: 2,
+      created_at: Time.current,
+      updated_at: Time.current
+    },
+    {
+      title: "冬にピッタリな、カフェラテ。トールサイズ。",
+      detail: "冬にピッタリな、カフェラテ。トールサイズ。",
+      thumbnail: "../../assets/images/coupon-image-3.png",
       price: 0.1,
       organization_id: 3,
       created_at: Time.current,
