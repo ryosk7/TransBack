@@ -37,7 +37,7 @@ class OrganizationsController < ApplicationController
   # DELETE /organizations/1
   # DELETE /organizations/1.json
   def destroy
-    @organization.destroy
+    @organization.destroy!
   end
 
   private

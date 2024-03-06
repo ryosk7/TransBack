@@ -37,7 +37,7 @@ class CouponsController < ApplicationController
   # DELETE /coupons/1
   # DELETE /coupons/1.json
   def destroy
-    @coupon.destroy
+    @coupon.destroy!
   end
 
   private
