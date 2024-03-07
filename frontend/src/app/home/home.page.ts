@@ -3,8 +3,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent,
-} from '@ionic/angular/standalone';
+  IonContent, IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CouponService } from '../services/coupon.service';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
@@ -34,7 +33,7 @@ const metadata = {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonIcon, 
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -49,6 +48,7 @@ export class HomePage {
     chains: [testnet],
     projectId,
   });
+  isConnected = false;
   address = "";
 
   constructor(private service: CouponService) {
@@ -60,11 +60,12 @@ export class HomePage {
   openConnectModal() {
     this.modal.subscribeProvider((data) => {
       if (data.address && data.isConnected && !this.address) {
-        console.log("address: ", data.address)
         this.address = data.address;
+        this.isConnected = true;
       }
       if (!data.isConnected && this.address) {
         this.address = "";
+        this.isConnected = false;
       }
     })
     return this.modal.open();
