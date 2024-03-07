@@ -13,17 +13,17 @@ import { environment } from 'src/environments/environment.dev';
 const projectId = environment.wc_key;
 
 // 2. Set chains
-const mainnet = {
-  chainId: 1,
-  name: 'Ethereum',
+const testnet = {
+  chainId: 11155111,
+  name: 'Sepolia',
   currency: 'ETH',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com',
+  explorerUrl: 'https://sepolia.etherscan.io/',
+  rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
 };
 
 // 3. Create modal
 const metadata = {
-  name: 'T-Rex',
+  name: 'ryosk7',
   description: 'My Website description',
   url: 'https://mywebsite.com',
   icons: ['https://avatars.mywebsite.com/'],
@@ -46,9 +46,10 @@ export class HomePage {
   coupons: any;
   modal = createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
-    chains: [mainnet],
+    chains: [testnet],
     projectId,
   });
+  address = "";
 
   constructor(private service: CouponService) {
     this.service.getCoupons().subscribe((data) => {
@@ -57,6 +58,15 @@ export class HomePage {
   }
 
   openConnectModal() {
+    this.modal.subscribeProvider((data) => {
+      if (data.address && data.isConnected && !this.address) {
+        console.log("address: ", data.address)
+        this.address = data.address;
+      }
+      if (!data.isConnected && this.address) {
+        this.address = "";
+      }
+    })
     return this.modal.open();
   }
 }
