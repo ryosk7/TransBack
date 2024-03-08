@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     resources :coupons
     resources :organizations
+    resources :user_wallets
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

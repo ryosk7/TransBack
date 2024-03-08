@@ -55,9 +55,11 @@ export class HomePage {
     this.service.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
+
+    this.subscriveConnection()
   }
 
-  openConnectModal() {
+  subscriveConnection() {
     this.modal.subscribeProvider((data) => {
       if (data.address && data.isConnected && !this.address) {
         this.address = data.address;
@@ -68,6 +70,10 @@ export class HomePage {
         this.isConnected = false;
       }
     })
+  }
+
+  openConnectModal() {
+    this.subscriveConnection()
     return this.modal.open();
   }
 }
