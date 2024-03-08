@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@web3modal/siwe": "^4.0.13",
+    "siwe": "^2.1.4"
+  }
+}
