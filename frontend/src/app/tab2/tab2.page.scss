@@ -1,0 +1,43 @@
+.user-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.99rem 0 1.4rem 2.24rem;
+
+  &__avatar {
+    img {
+      border-radius: 50%;
+      aspect-ratio: 1;
+      height: 6.83119rem;
+    }
+  }
+
+  &__user-data {
+    overflow: hidden;
+    margin-left: 1.61rem;
+
+    &__name {
+      color: var(--text-main, #222);
+      font-family: Inter;
+      font-size: 1.74319rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.05231rem;
+      white-space: nowrap;
+    }
+
+    &__address {
+      color: var(--text-sub, #797979);
+      font-family: Inter;
+      font-size: 1.05519rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.03163rem;
+    }
+
+    &__connection-status {
+
+    }
+  }
+}
