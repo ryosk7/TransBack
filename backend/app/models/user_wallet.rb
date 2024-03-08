@@ -1,2 +1,0 @@
-class UserWallet < ApplicationRecord
-end

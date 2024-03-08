@@ -8,6 +8,7 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { CouponService } from '../services/coupon.service';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
 import { environment } from 'src/environments/environment.dev';
+import { UserService } from '../services/user.service';
 
 const projectId = environment.wc_key;
 
@@ -51,8 +52,11 @@ export class HomePage {
   isConnected = false;
   address = "";
 
-  constructor(private service: CouponService) {
-    this.service.getCoupons().subscribe((data) => {
+  constructor(
+    private couponService: CouponService,
+    private userService: UserService
+  ) {
+    this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
 
@@ -64,6 +68,9 @@ export class HomePage {
       if (data.address && data.isConnected && !this.address) {
         this.address = data.address;
         this.isConnected = true;
+        this.userService.postUser(this.address).subscribe((data) => {
+          console.log("data: ", data);
+        })
       }
       if (!data.isConnected && this.address) {
         this.address = "";

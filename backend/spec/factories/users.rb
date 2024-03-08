@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user_wallet do
+  factory :user do
     address { "MyText" }
     name { "MyString" }
     avatar { "MyText" }
