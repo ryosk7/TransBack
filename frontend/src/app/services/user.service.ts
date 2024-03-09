@@ -30,4 +30,8 @@ export class UserService {
   get currentUser() {
     return this._user;
   }
+
+  set setUser(user: User | null) {
+    this._user.set(user);
+  }
 }

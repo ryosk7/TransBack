@@ -47,8 +47,7 @@ export class WalletService {
             this.userService.postOrFetchUser(this._address()).subscribe();
           }
           if (!data.isConnected && this._address()) {
-            this._address.set("");
-            this._isConnected.set(false);
+            this.disconnect();
           }
 
           observer.next(this._isConnected());
@@ -58,5 +57,15 @@ export class WalletService {
       concatMap(() => this.userService.postOrFetchUser(this._address())),
       map(() => this._isConnected())
     );
+  }
+
+  get isConnected() {
+    return this._isConnected;
+  }
+
+  disconnect() {
+    this._address.set("");
+    this._isConnected.set(false);
+    this.userService.setUser = null;
   }
 }

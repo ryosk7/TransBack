@@ -56,7 +56,10 @@ export class Tab2Page {
     if (!this.currentUser) {
       this.walletService.subscribeConnection().subscribe(() => {
         this.currentUser = this.userService.currentUser();
+        this.isConnected = this.walletService.isConnected();
       });
+    } else {
+      this.isConnected = true;
     }
   }
 
