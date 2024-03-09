@@ -13,4 +13,37 @@
       </div>
     </div>
   </ion-header>
+
+  <div class="section-title">
+    保有しているクーポン
+  </div>
+
+  <div class="coupons-list">
+    @for (coupon of coupons; track coupon.id) {
+    <div class="coupons-list__coupon">
+      <div class="coupons-list__coupon__thambnail">
+        <img [src]="coupon.thumbnail" alt="coupon-thumbnail" />
+      </div>
+      <div class="coupons-list__coupon__simple-detail">
+        <div class="coupons-list__coupon__simple-detail__organization-name">
+          {{ coupon.organization_name }}
+        </div>
+        <div class="coupons-list__coupon__simple-detail__coupon-title">
+          {{ coupon.title }}
+        </div>
+        <div class="coupons-list__coupon__simple-detail__coupon-donate">
+          <div
+            class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group"
+          >
+            <div
+              class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group__action-name"
+            >
+              利用する
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
 </ion-content>

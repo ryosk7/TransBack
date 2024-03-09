@@ -4,7 +4,7 @@ ion-header {
 
 .user-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   padding: 1.82rem 0 1.28rem 2.05rem;
 
   &__avatar {
@@ -57,6 +57,107 @@ ion-header {
 
     &__connection-status {
       margin-top: 0.7rem;
+
+      img {
+        height: 1.8rem;
+      }
+    }
+  }
+}
+
+.section-title {
+  color: var(--text-main, #222);
+  font-family: Inter;
+  font-size: 0.96525rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.02894rem;
+  margin: 1.55rem 1.54rem 0.39rem;
+}
+
+.coupons-list {
+  background: var(
+    --bg-index,
+    linear-gradient(180deg, rgba(246, 246, 246, 0) 0%, #f6f6f6 8%)
+  );
+
+  &__coupon {
+    border-radius: 0.74844rem;
+    background: #fff;
+    margin: 0 1.42rem 1.07rem;
+    display: flex;
+
+    &__thambnail {
+      padding: 0.85rem 0 0.85rem 0.85rem;
+
+      img {
+        width: 7.60913rem;
+        height: 7.60913rem;
+        border-radius: 0.49894rem;
+      }
+    }
+
+    &__simple-detail {
+      padding: 0.95rem 0.89rem;
+      width: 15.13088rem;
+
+      &__organization-name {
+        color: var(--text-sub, #797979);
+        font-family: Inter;
+        font-size: 0.70488rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.02713rem;
+        margin-bottom: 0.4rem;
+      }
+
+      &__coupon-title {
+        color: var(--text-main, #222);
+        font-family: Inter;
+        font-size: 0.70488rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 143%; /* 1.29394rem */
+        letter-spacing: 0.04525rem;
+        margin-bottom: 0.21rem;
+        height: 4.54138rem;
+        width: 12rem;
+        overflow-wrap: break-word;
+      }
+
+      &__coupon-donate {
+        display: flex;
+        justify-content: right;
+        align-items: end;
+
+        &__price {
+          color: var(--text-accent, #fc581c);
+          font-family: Inter;
+          font-size: 0.70488rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: 0.09956rem;
+        }
+
+        &__exchange-button-group {
+          border-radius: 1.27994rem;
+          background: var(--main, #ff581f);
+          padding: 0.62rem;
+
+          &__action-name {
+            color: var(--text-contrast, #fff);
+            font-family: Inter;
+            font-size: 0.6865rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.02063rem;
+          }
+        }
+      }
     }
   }
 }
