@@ -51,7 +51,7 @@ export class Tab2Page {
       this.coupons = data;
     });
     this.currentUser = this.userService.currentUser()
-    if (this.currentUser) {
+    if (!this.currentUser) {
       this.subscriveConnection()
     }
   }
@@ -65,7 +65,9 @@ export class Tab2Page {
       if (data.address && data.isConnected && !this.address) {
         this.address = data.address;
         this.isConnected = true;
-        this.userService.postOrFetchUser(this.address).subscribe();
+        this.userService.postOrFetchUser(this.address).subscribe(data => {
+          this.currentUser = this.userService.currentUser()
+        });
       }
       if (!data.isConnected && this.address) {
         this.address = "";

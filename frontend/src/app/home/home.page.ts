@@ -8,7 +8,7 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { CouponService } from '../services/coupon.service';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
 import { environment } from 'src/environments/environment.dev';
-import { UserService } from '../services/user.service';
+import { User, UserService } from '../services/user.service';
 
 const projectId = environment.wc_key;
 
@@ -51,6 +51,7 @@ export class HomePage {
   });
   isConnected = false;
   address = "";
+  currentUser: User | null = null;
 
   constructor(
     private couponService: CouponService,
@@ -59,7 +60,12 @@ export class HomePage {
     this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
-    this.subscriveConnection()
+    this.currentUser = this.userService.currentUser()
+    if (!this.currentUser) {
+      this.subscriveConnection()
+    } else {
+      this.isConnected = true;
+    }
   }
 
   subscriveConnection() {
