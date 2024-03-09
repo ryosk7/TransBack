@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_08_031748) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_09_181633) do
   create_table "coupons", force: :cascade do |t|
     t.string "title", null: false
     t.text "detail", null: false
@@ -28,6 +28,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_031748) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_coupons", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "coupon_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_user_coupons_on_coupon_id"
+    t.index ["user_id"], name: "index_user_coupons_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.text "address"
     t.string "name"
@@ -37,4 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_031748) do
   end
 
   add_foreign_key "coupons", "organizations"
+  add_foreign_key "user_coupons", "coupons"
+  add_foreign_key "user_coupons", "users"
 end

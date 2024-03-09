@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :coupons
     resources :organizations
     resources :users
+    resources :user_coupons
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
