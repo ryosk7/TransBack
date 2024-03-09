@@ -4,6 +4,7 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { CouponService } from '../services/coupon.service';
 import { environment } from 'src/environments/environment.dev';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
+import { User, UserService } from '../services/user.service';
 
 const projectId = environment.wc_key;
 
@@ -33,20 +34,51 @@ const metadata = {
 })
 export class Tab2Page {
   coupons: any;
+  currentUser: User | null = null;
   modal = createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
     chains: [testnet],
     projectId,
   });
+  isConnected = false;
+  address = "";
 
-  constructor(private couponService: CouponService) {
+  constructor(
+    private couponService: CouponService,
+    private userService: UserService
+  ) {
     this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
+    this.currentUser = this.userService.currentUser()
+    if (this.currentUser) {
+      this.subscriveConnection()
+    }
   }
 
   openConnectModal() {
     return this.modal.open();
   }
 
+  subscriveConnection() {
+    this.modal.subscribeProvider((data) => {
+      if (data.address && data.isConnected && !this.address) {
+        this.address = data.address;
+        this.isConnected = true;
+        this.userService.postOrFetchUser(this.address).subscribe();
+      }
+      if (!data.isConnected && this.address) {
+        this.address = "";
+        this.isConnected = false;
+      }
+    })
+  }
+
+  shortAddress() {
+    if (this.currentUser?.address) {
+      return `${this.currentUser?.address.slice(0, 6)}...${this.currentUser?.address.slice(-4)}`;
+    } else {
+      return null;
+    }
+  }
 }

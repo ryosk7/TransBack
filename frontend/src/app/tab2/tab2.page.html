@@ -5,8 +5,8 @@
         <img src="../../assets/images/default-avatar.png" alt="user-avatar" />
       </div>
       <div class="user-group__user-data">
-        <div class="user-group__user-data__name">Ryosuke Uchida</div>
-        <div class="user-group__user-data__address">0xe5F26...d0623</div>
+        <div class="user-group__user-data__name">{{ currentUser?.name }}</div>
+        <div class="user-group__user-data__address">{{ shortAddress() }}</div>
         <div class="user-group__user-data__connection-status"
           tappable
           (click)="openConnectModal()"

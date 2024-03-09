@@ -59,7 +59,6 @@ export class HomePage {
     this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
-
     this.subscriveConnection()
   }
 
@@ -68,9 +67,7 @@ export class HomePage {
       if (data.address && data.isConnected && !this.address) {
         this.address = data.address;
         this.isConnected = true;
-        this.userService.postUser(this.address).subscribe((data) => {
-          console.log("data: ", data);
-        })
+        this.userService.postOrFetchUser(this.address).subscribe();
       }
       if (!data.isConnected && this.address) {
         this.address = "";

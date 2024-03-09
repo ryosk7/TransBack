@@ -1,19 +1,33 @@
-import { Injectable } from '@angular/core';
+import { signal, Injectable, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
+import { environment } from 'src/environments/environment.dev';
+
+export type User = {
+  address: string;
+  name: string;
+  avatar: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  url = 'http://localhost:3000';
+  private _url = environment.url;
+  private _user = signal<User | null>(null);
 
   constructor(private httpClient: HttpClient) {}
 
   loadUsers() {
-    return this.httpClient.get(`${this.url}/users`);
+    return this.httpClient.get(`${this._url}/users`);
   }
 
-  postUser(address: string) {
-    return this.httpClient.post(`${this.url}/users`, {address: address});
+  postOrFetchUser(address: string) {
+    return this.httpClient.post<User>(`${this._url}/users`, {address: address})
+    .pipe(tap((user) => this._user.set(user)));
+  }
+
+  get currentUser() {
+    return this._user;
   }
 }
