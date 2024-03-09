@@ -5,6 +5,7 @@ import { CouponService } from '../services/coupon.service';
 import { environment } from 'src/environments/environment.dev';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
 import { User, UserService } from '../services/user.service';
+import { WalletService } from '../services/wallet.service';
 
 const projectId = environment.wc_key;
 
@@ -45,35 +46,22 @@ export class Tab2Page {
 
   constructor(
     private couponService: CouponService,
-    private userService: UserService
+    private userService: UserService,
+    private walletService: WalletService
   ) {
     this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
-    this.currentUser = this.userService.currentUser()
+    this.currentUser = this.userService.currentUser();
     if (!this.currentUser) {
-      this.subscriveConnection()
+      this.walletService.subscribeConnection().subscribe(() => {
+        this.currentUser = this.userService.currentUser();
+      });
     }
   }
 
   openConnectModal() {
     return this.modal.open();
-  }
-
-  subscriveConnection() {
-    this.modal.subscribeProvider((data) => {
-      if (data.address && data.isConnected && !this.address) {
-        this.address = data.address;
-        this.isConnected = true;
-        this.userService.postOrFetchUser(this.address).subscribe(data => {
-          this.currentUser = this.userService.currentUser()
-        });
-      }
-      if (!data.isConnected && this.address) {
-        this.address = "";
-        this.isConnected = false;
-      }
-    })
   }
 
   shortAddress() {
