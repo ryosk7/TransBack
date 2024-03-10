@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+export type Coupon = {
+  id: number;
+  title: string;
+  detail: string;
+  thumbnail: string;
+  price: string;
+  organization_name: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -10,6 +19,10 @@ export class CouponService {
   constructor(private httpClient: HttpClient) {}
 
   getCoupons() {
-    return this.httpClient.get(`${this.url}/coupons`);
+    return this.httpClient.get<Coupon[]>(`${this.url}/coupons`);
+  }
+
+  getUserCoupons() {
+    return this.httpClient.get<Coupon[]>(`${this.url}/user_coupons`);
   }
 }

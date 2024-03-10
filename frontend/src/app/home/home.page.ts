@@ -5,9 +5,11 @@ import {
   IonTitle,
   IonContent, IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { CouponService } from '../services/coupon.service';
+import { Coupon, CouponService } from '../services/coupon.service';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
 import { environment } from 'src/environments/environment.dev';
+import { User, UserService } from '../services/user.service';
+import { WalletService } from '../services/wallet.service';
 
 const projectId = environment.wc_key;
 
@@ -42,7 +44,7 @@ const metadata = {
   ],
 })
 export class HomePage {
-  coupons: any;
+  coupons: Coupon[] = [];
   modal = createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
     chains: [testnet],
@@ -50,24 +52,28 @@ export class HomePage {
   });
   isConnected = false;
   address = "";
+  currentUser: User | null = null;
 
-  constructor(private service: CouponService) {
-    this.service.getCoupons().subscribe((data) => {
+  constructor(
+    private couponService: CouponService,
+    private userService: UserService,
+    private walletService: WalletService
+  ) {
+    this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });
+    this.currentUser = this.userService.currentUser()
+    if (!this.currentUser) {
+      this.walletService.subscribeConnection().subscribe((isConnected) => {
+        this.isConnected = isConnected;
+      });
+    } else {
+      this.isConnected = true;
+    }
   }
 
   openConnectModal() {
-    this.modal.subscribeProvider((data) => {
-      if (data.address && data.isConnected && !this.address) {
-        this.address = data.address;
-        this.isConnected = true;
-      }
-      if (!data.isConnected && this.address) {
-        this.address = "";
-        this.isConnected = false;
-      }
-    })
+    this.walletService.subscribeConnection().subscribe();
     return this.modal.open();
   }
 }

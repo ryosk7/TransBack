@@ -1,17 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
+  <ion-header [translucent]="false">
+    @if (isConnected) {
+      <div class="user-group">
+        <div class="user-group__avatar">
+          <img src="../../assets/images/default-avatar.png" alt="user-avatar" />
+        </div>
+        <div class="user-group__user-data">
+          <div class="user-group__user-data__name">{{ currentUser?.name }}</div>
+          <div class="user-group__user-data__address">{{ shortAddress() }}</div>
+          <div class="user-group__user-data__connection-status"
+            tappable
+            (click)="openConnectModal()"
+          >
+            <img src="../../assets/icon/btn-metamask-connected.svg" alt="wallet-connect-button" />
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="user-group not-connected">
+        <div class="user-group__avatar">
+        </div>
+        <div class="user-group__user-data">
+          <div class="user-group__user-data__name"></div>
+          <div class="user-group__user-data__address"></div>
+          <div class="user-group__user-data__connection-status"
+            tappable
+            (click)="openConnectModal()"
+          >
+            <img src="../../assets/icon/btn-metamask-connection-contrast.svg" alt="wallet-connect-button" />
+          </div>
+        </div>
+      </div>
+    }
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="section-title">
+    保有しているクーポン
+  </div>
+
+  @if (isConnected) {
+    <div class="coupons-list">
+      @for (coupon of coupons; track coupon.id) {
+      <div class="coupons-list__coupon">
+        <div class="coupons-list__coupon__thambnail">
+          <img [src]="coupon.thumbnail" alt="coupon-thumbnail" />
+        </div>
+        <div class="coupons-list__coupon__simple-detail">
+          <div class="coupons-list__coupon__simple-detail__organization-name">
+            {{ coupon.organization_name }}
+          </div>
+          <div class="coupons-list__coupon__simple-detail__coupon-title">
+            {{ coupon.title }}
+          </div>
+          <div class="coupons-list__coupon__simple-detail__coupon-donate">
+            <div
+              class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group"
+            >
+              <div
+                class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group__action-name"
+              >
+                利用する
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  }
 </ion-content>
