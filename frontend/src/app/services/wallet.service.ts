@@ -1,6 +1,6 @@
 import { signal, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.dev';
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers';
 import { UserService } from './user.service';
 import { Observable, concatMap, map } from 'rxjs';
 
@@ -33,25 +33,23 @@ export class WalletService {
     projectId,
   });
   private _isConnected = signal(false);
-  private _address = signal("");
+  private _address = signal('');
 
   constructor(private userService: UserService) {}
 
   subscribeConnection(): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      this._modal.subscribeProvider(
-        (data) => {
-          if (data.address && data.isConnected && !this._address()) {
-            this._address.set(data.address);
-            this._isConnected.set(true);
-          }
-          if (!data.isConnected && this._address()) {
-            this.disconnect();
-          }
-
-          observer.next(this._isConnected());
+    return new Observable<boolean>((observer) => {
+      this._modal.subscribeProvider((data) => {
+        if (data.address && data.isConnected && !this._address()) {
+          this._address.set(data.address);
+          this._isConnected.set(true);
         }
-      )
+        if (!data.isConnected && this._address()) {
+          this.disconnect();
+        }
+
+        observer.next(this._isConnected());
+      });
     }).pipe(
       concatMap(() => this.userService.postOrFetchUser(this._address())),
       map(() => this._isConnected())
@@ -63,7 +61,7 @@ export class WalletService {
   }
 
   disconnect() {
-    this._address.set("");
+    this._address.set('');
     this._isConnected.set(false);
     this.userService.setUser = null;
   }
