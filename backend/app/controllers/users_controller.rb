@@ -17,6 +17,8 @@ class UsersController < ApplicationController
   def create
     @user = User.find_or_create_by(user_params)
 
+    binding.irb
+
     if @user.present?
       render :show, status: :created, location: @user
     else
@@ -49,5 +51,9 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:address, :name, :avatar)
+    end
+
+    def current_user
+      @current_user ||= session[:current_user_id] && User.find_by(id: session[:current_user_id])
     end
 end

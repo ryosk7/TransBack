@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment.dev';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
 import { UserService } from './user.service';
 import { Observable, concatMap, map } from 'rxjs';
+import { SessionService } from './session.service';
 
 const projectId = environment.wc_key;
 
@@ -35,7 +36,10 @@ export class WalletService {
   private _isConnected = signal(false);
   private _address = signal("");
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private sessionService: SessionService
+  ) {}
 
   subscribeConnection(): Observable<boolean> {
     return new Observable<boolean>(observer => {
@@ -54,6 +58,7 @@ export class WalletService {
       )
     }).pipe(
       concatMap(() => this.userService.postOrFetchUser(this._address())),
+      concatMap(() => this.sessionService.currentUserSession(this._address())),
       map(() => this._isConnected())
     );
   }
