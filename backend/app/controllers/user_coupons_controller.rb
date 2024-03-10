@@ -4,7 +4,7 @@ class UserCouponsController < ApplicationController
   # GET /user_coupons
   # GET /user_coupons.json
   def index
-    @user_coupons = UserCoupon.all
+    @user_coupons = User.first.user_coupons || []
   end
 
   # GET /user_coupons/1

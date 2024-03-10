@@ -44,7 +44,6 @@ export class WalletService {
           if (data.address && data.isConnected && !this._address()) {
             this._address.set(data.address);
             this._isConnected.set(true);
-            this.userService.postOrFetchUser(this._address()).subscribe();
           }
           if (!data.isConnected && this._address()) {
             this.disconnect();

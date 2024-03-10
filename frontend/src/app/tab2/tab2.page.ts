@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { CouponService } from '../services/coupon.service';
+import { Coupon, CouponService } from '../services/coupon.service';
 import { environment } from 'src/environments/environment.dev';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
 import { User, UserService } from '../services/user.service';
@@ -34,7 +34,7 @@ const metadata = {
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent]
 })
 export class Tab2Page {
-  coupons: any;
+  coupons: Coupon[] = [];
   currentUser: User | null = null;
   modal = createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
@@ -49,7 +49,7 @@ export class Tab2Page {
     private userService: UserService,
     private walletService: WalletService
   ) {
-    this.couponService.getCoupons().subscribe((data) => {
+    this.couponService.getUserCoupons().subscribe((data) => {
       this.coupons = data;
     });
     this.currentUser = this.userService.currentUser();

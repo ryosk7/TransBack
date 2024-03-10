@@ -19,7 +19,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   loadUsers() {
-    return this.httpClient.get(`${this._url}/users`);
+    return this.httpClient.get<User[]>(`${this._url}/users`);
   }
 
   postOrFetchUser(address: string) {
