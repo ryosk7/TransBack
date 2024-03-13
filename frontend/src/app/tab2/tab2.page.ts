@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+} from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Coupon, CouponService } from '../services/coupon.service';
 import { environment } from 'src/environments/environment.dev';
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5';
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers';
 import { User, UserService } from '../services/user.service';
 import { WalletService } from '../services/wallet.service';
 
@@ -31,7 +36,13 @@ const metadata = {
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent]
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    ExploreContainerComponent,
+  ],
 })
 export class Tab2Page {
   coupons: Coupon[] = [];
@@ -42,7 +53,7 @@ export class Tab2Page {
     projectId,
   });
   isConnected = false;
-  address = "";
+  address = '';
 
   constructor(
     private couponService: CouponService,
@@ -69,7 +80,10 @@ export class Tab2Page {
 
   shortAddress() {
     if (this.currentUser?.address) {
-      return `${this.currentUser?.address.slice(0, 6)}...${this.currentUser?.address.slice(-4)}`;
+      return `${this.currentUser?.address.slice(
+        0,
+        6
+      )}...${this.currentUser?.address.slice(-4)}`;
     } else {
       return null;
     }

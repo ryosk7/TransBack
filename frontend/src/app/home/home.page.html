@@ -6,16 +6,27 @@
   <div class="dashboard-group">
     <div class="dashboard-group__bg">
       @if (isConnected) {
-        <div class="dashboard-group__bg__title">寄付可能な残り残高</div>
-        <div class="dashboard-group__bg__money-with-union">
-          <span class="money">2.68</span>ETH
-        </div>
-        <div class="dashboard-group__bg__can-be-donated-left-time">0時19分時点</div>
+      <div class="dashboard-group__bg__title">寄付可能な残り残高</div>
+      <div class="dashboard-group__bg__money-with-union">
+        <span class="money">2.68</span>ETH
+      </div>
+      <div class="dashboard-group__bg__can-be-donated-left-time">
+        0時19分時点
+      </div>
       } @else {
-        <div class="dashboard-group__bg__title">Walletと連携してお得に寄付しよう！</div>
-        <div class="dashboard-group__bg__connect-wallet" tappable (click)="openConnectModal()">
-          <img src="../../assets/icon/btn-metamask-connection.svg" alt="wallet-connect-button" />
-        </div>
+      <div class="dashboard-group__bg__title">
+        Walletと連携してお得に寄付しよう！
+      </div>
+      <div
+        class="dashboard-group__bg__connect-wallet"
+        tappable
+        (click)="openConnectModal()"
+      >
+        <img
+          src="../../assets/icon/btn-metamask-connection.svg"
+          alt="wallet-connect-button"
+        />
+      </div>
       }
     </div>
   </div>
@@ -43,6 +54,7 @@
           >
             <div
               class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group__action-name"
+              (click)="donate()"
             >
               寄付して獲得
             </div>
