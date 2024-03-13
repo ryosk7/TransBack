@@ -8,10 +8,10 @@
       @if (isConnected) {
       <div class="dashboard-group__bg__title">寄付可能な残り残高</div>
       <div class="dashboard-group__bg__money-with-union">
-        <span class="money">2.68</span>ETH
+        <span class="money">{{ remainingBalance }}</span>ETH
       </div>
       <div class="dashboard-group__bg__can-be-donated-left-time">
-        0時19分時点
+        {{ snapTime() }}
       </div>
       } @else {
       <div class="dashboard-group__bg__title">
@@ -47,7 +47,7 @@
           <div
             class="coupons-list__coupon__simple-detail__coupon-donate__price"
           >
-            {{ coupon.price }}ETH
+            {{ exchangeRate(coupon.price) }}ETH
           </div>
           <div
             class="coupons-list__coupon__simple-detail__coupon-donate__exchange-button-group"

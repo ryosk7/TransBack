@@ -17,6 +17,8 @@ import Web3 from 'web3';
 import FundraiserContract from '../../../contracts/Fundraiser.json';
 import { LoadingController } from '@ionic/angular/standalone';
 
+const cc = require('cryptocompare')
+
 const projectId = environment.wc_key;
 
 // 2. Set chains
@@ -70,6 +72,8 @@ export class HomePage {
   isConnected = false;
   address = '';
   currentUser: User | null = null;
+  remainingBalance = "---";
+  jpyToEthRate = null;
 
   constructor(
     private couponService: CouponService,
@@ -88,6 +92,15 @@ export class HomePage {
     } else {
       this.isConnected = true;
     }
+
+    const jpyAmount = 1100000;
+    this.convertJPYtoETHRate().then((rate) => {
+      this.jpyToEthRate = rate.JPY;
+    });
+
+    this.convertJPYtoETH(jpyAmount).then((ethAmount) => {
+      this.remainingBalance = ethAmount.toFixed(2) 
+    });
   }
 
   openConnectModal() {
@@ -95,31 +108,63 @@ export class HomePage {
     return this.modal.open();
   }
 
+  snapTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    // 時間と分が1桁の場合、先頭に0を追加する
+    const formattedHours = hours.toString().padStart(2, '0');
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    return `${formattedHours}時${formattedMinutes}分時点`;
+  }
+
+  async convertJPYtoETHRate() {
+    return await cc.price('ETH', ['JPY']);
+  }
+
+  async convertJPYtoETH(jpyAmount: number) {
+    const exchangeRate = await cc.price('ETH', ['JPY']);
+    const ethAmount = jpyAmount / exchangeRate.JPY;
+    return ethAmount;
+  }
+
+  exchangeRate(jpyAmount: number) {
+    let amount = "---";
+    if (this.jpyToEthRate) {
+      amount = (jpyAmount / this.jpyToEthRate).toFixed(4);
+    }
+    return amount
+  }
+
   async donate(coupon: Coupon) {
     const loading = await this.loadingController.create();
     await loading.present();
-    const amount = coupon.price.toString();
-    const web3 = new Web3(this.modal.getWalletProvider());
+    const amount = coupon.price;
+    this.convertJPYtoETH(amount).then((ethAmount) => {
+      const web3 = new Web3(this.modal.getWalletProvider());
 
-    const contractABI = FundraiserContract.abi;
-    const contractAddress = '0xF014bbE6660B2F2db0151A95d5a391842284ec5d';
-    const contract = new web3.eth.Contract(contractABI, contractAddress);
-    const fromAddress = this.modal.getAddress();
-    const currentUser = this.currentUser;
-    const couponService = this.couponService;
+      const contractABI = FundraiserContract.abi;
+      const contractAddress = '0xF014bbE6660B2F2db0151A95d5a391842284ec5d';
+      const contract = new web3.eth.Contract(contractABI, contractAddress);
+      const fromAddress = this.modal.getAddress();
+      const couponService = this.couponService;
+      const userService = this.userService;
 
-    contract.methods['donate']()
-      .send({
-        from: fromAddress,
-        value: web3.utils.toWei(amount, 'ether'),
-        gas: '650000',
-      })
-      .then(function (receipt) {
-        console.log(receipt);
-        loading.dismiss();
-        if (currentUser) {
-          couponService.createUserCoupon(coupon.id, currentUser.id).subscribe();
-        }
+      contract.methods['donate']()
+        .send({
+          from: fromAddress,
+          value: web3.utils.toWei(ethAmount, 'ether'),
+          gas: '650000',
+        })
+        .then(function (receipt) {
+          console.log(receipt);
+          loading.dismiss();
+          const donateUser = userService.currentUser()
+          if (donateUser) {
+            couponService.createUserCoupon(coupon.id, donateUser.id).subscribe();
+          }
+        });
       });
   }
 
