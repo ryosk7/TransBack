@@ -38,16 +38,6 @@ const metadata = {
   icons: ['https://avatars.mywebsite.com/'],
 };
 
-const USDTAddress = '0x617f3112bf5397D0467D315cC709EF968D9ba546';
-
-const USDTAbi = [
-  'function name() view returns (string)',
-  'function symbol() view returns (string)',
-  'function balanceOf(address) view returns (uint)',
-  'function transfer(address to, uint amount)',
-  'event Transfer(address indexed from, address indexed to, uint amount)',
-];
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -167,25 +157,5 @@ export class HomePage {
           }
         });
       });
-  }
-
-  async getBalance() {
-    const walletProvider = this.modal.getWalletProvider();
-
-    if (!this.isConnected) throw Error('User disconnected');
-
-    if (walletProvider) {
-      try {
-        const ethersProvider = new BrowserProvider(walletProvider);
-        const signer = await ethersProvider.getSigner();
-        this.address = await signer.getAddress();
-        // The Contract object
-        const USDTContract = new Contract(USDTAddress, USDTAbi, signer);
-        const USDTBalance = await USDTContract['balanceOf'](this.address);
-        console.log(formatUnits(USDTBalance, 18));
-      } catch (error) {
-        console.error(error);
-      }
-    }
   }
 }
