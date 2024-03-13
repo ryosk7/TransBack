@@ -10,7 +10,7 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { Coupon, CouponService } from '../services/coupon.service';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers';
 import { BrowserProvider, Contract, formatUnits } from 'ethers';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 import { User, UserService } from '../services/user.service';
 import { WalletService } from '../services/wallet.service';
 import Web3 from 'web3';
@@ -81,6 +81,7 @@ export class HomePage {
     private walletService: WalletService,
     private loadingController: LoadingController
   ) {
+    console.log('production?: ', environment.production);
     this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
     });

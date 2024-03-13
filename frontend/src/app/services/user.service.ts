@@ -1,7 +1,7 @@
 import { signal, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 
 export type User = {
   id: number;
