@@ -6,7 +6,7 @@ export type Coupon = {
   title: string;
   detail: string;
   thumbnail: string;
-  price: string;
+  price: number;
   organization_name: string;
 };
 

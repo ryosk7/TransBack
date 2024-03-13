@@ -8,6 +8,7 @@ export type User = {
   address: string;
   name: string;
   avatar: string;
+  total_purchase_amount: number;
 };
 
 @Injectable({
