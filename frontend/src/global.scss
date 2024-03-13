@@ -24,3 +24,18 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.plt-desktop {
+  display: flex;
+  justify-content: center;
+
+  body {
+    max-width: 440px;
+    border: 1px solid var(--ion-border-color);
+  }
+
+  .modal-wrapper {
+    max-width: 420px;
+    margin-left: 20.5%;
+  }
+}

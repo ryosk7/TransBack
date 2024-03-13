@@ -4,6 +4,12 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonModal,
+  IonList,
+  IonButton
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Coupon, CouponService } from '../services/coupon.service';
@@ -42,6 +48,13 @@ const metadata = {
     IonTitle,
     IonContent,
     ExploreContainerComponent,
+    IonModal,
+    IonIcon,
+    IonLabel,
+    IonItem,
+    IonList,
+    IonButton
+    
   ],
 })
 export class Tab2Page {
