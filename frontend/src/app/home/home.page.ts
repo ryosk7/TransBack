@@ -131,31 +131,37 @@ export class HomePage {
   async donate(coupon: Coupon) {
     const loading = await this.loadingController.create();
     await loading.present();
-    const amount = coupon.price;
-    this.convertJPYtoETH(amount).then((ethAmount) => {
+    try {
+      const amount = coupon.price;
+      const ethAmount = await this.convertJPYtoETH(amount)
       const web3 = new Web3(this.modal.getWalletProvider());
 
       const contractABI = FundraiserContract.abi;
       const contractAddress = '0xF014bbE6660B2F2db0151A95d5a391842284ec5d';
-      const contract = new web3.eth.Contract(contractABI, contractAddress);
-      const fromAddress = this.modal.getAddress();
+      const walletProvider = this.modal.getWalletProvider()
+      if (!walletProvider) { return }
+      const ethersProvider = new BrowserProvider(walletProvider)
+      const signer = await ethersProvider.getSigner()
+      const contract = new Contract(contractAddress, contractABI, signer);
+
       const couponService = this.couponService;
       const userService = this.userService;
 
-      contract.methods['donate']()
-        .send({
-          from: fromAddress,
-          value: web3.utils.toWei(ethAmount, 'ether'),
-          gas: '650000',
-        })
-        .then(function (receipt) {
-          console.log(receipt);
-          loading.dismiss();
-          const donateUser = userService.currentUser()
-          if (donateUser) {
-            couponService.createUserCoupon(coupon.id, donateUser.id).subscribe();
-          }
-        });
-      });
+      contract.getFunction('donate').send({
+        from: this.modal.getAddress(),
+        value: web3.utils.toWei(ethAmount, 'ether'),
+        gas: '650000',
+      }).then(function (receipt) {
+        console.log(receipt);
+        loading.dismiss();
+        const donateUser = userService.currentUser()
+        if (donateUser) {
+          couponService.createUserCoupon(coupon.id, donateUser.id).subscribe();
+        }
+      })
+    } catch (error) {
+      console.error(error);
+      loading.dismiss();
+    }
   }
 }
