@@ -18,7 +18,7 @@ coupons =
       title: "とろーりチーズとカリカリのベーコンのビッグマック",
       detail: "とろーりチーズとカリカリのベーコンのビッグマック",
       thumbnail: "../../assets/images/coupon-image-1.png",
-      price: 0.1,
+      price: 0.0025,
       organization_id: 1,
       created_at: Time.current,
       updated_at: Time.current
@@ -27,7 +27,7 @@ coupons =
       title: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
       detail: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
       thumbnail: "../../assets/images/coupon-image-2.png",
-      price: 0.1,
+      price: 0.0032,
       organization_id: 2,
       created_at: Time.current,
       updated_at: Time.current
@@ -36,7 +36,7 @@ coupons =
       title: "冬にピッタリな、カフェラテ。トールサイズ。",
       detail: "冬にピッタリな、カフェラテ。トールサイズ。",
       thumbnail: "../../assets/images/coupon-image-3.png",
-      price: 0.1,
+      price: 0.0014,
       organization_id: 3,
       created_at: Time.current,
       updated_at: Time.current
@@ -45,7 +45,7 @@ coupons =
       title: "とろーりチーズとカリカリのベーコンのビッグマック",
       detail: "とろーりチーズとカリカリのベーコンのビッグマック",
       thumbnail: "../../assets/images/coupon-image-1.png",
-      price: 0.1,
+      price: 0.0025,
       organization_id: 1,
       created_at: Time.current,
       updated_at: Time.current
@@ -54,7 +54,7 @@ coupons =
       title: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
       detail: "フレッシュな野菜と胸肉のサラダ自家製シーザードレッシングでどうぞ！",
       thumbnail: "../../assets/images/coupon-image-2.png",
-      price: 0.1,
+      price: 0.0032,
       organization_id: 2,
       created_at: Time.current,
       updated_at: Time.current
@@ -63,7 +63,7 @@ coupons =
       title: "冬にピッタリな、カフェラテ。トールサイズ。",
       detail: "冬にピッタリな、カフェラテ。トールサイズ。",
       thumbnail: "../../assets/images/coupon-image-3.png",
-      price: 0.1,
+      price: 0.0014,
       organization_id: 3,
       created_at: Time.current,
       updated_at: Time.current

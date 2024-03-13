@@ -60,22 +60,35 @@ export class Tab2Page {
     private userService: UserService,
     private walletService: WalletService
   ) {
-    this.couponService.getUserCoupons().subscribe((data) => {
-      this.coupons = data;
-    });
     this.currentUser = this.userService.currentUser();
     if (!this.currentUser) {
       this.walletService.subscribeConnection().subscribe(() => {
         this.currentUser = this.userService.currentUser();
         this.isConnected = this.walletService.isConnected();
+        if (this.currentUser) {
+          this.getMyCoupons(this.currentUser.id);
+        }
       });
     } else {
       this.isConnected = true;
+      this.getMyCoupons(this.currentUser.id);
+    }
+  }
+
+  ionViewWillEnter() {
+    if (this.currentUser) {
+      this.getMyCoupons(this.currentUser.id);
     }
   }
 
   openConnectModal() {
     return this.modal.open();
+  }
+
+  getMyCoupons(currentUserId: number) {
+    this.couponService.myCoupons(currentUserId).subscribe((data) => {
+      this.coupons = data;
+    });
   }
 
   shortAddress() {

@@ -4,10 +4,11 @@ import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment.dev';
 
 export type User = {
+  id: number;
   address: string;
   name: string;
   avatar: string;
-}
+};
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +24,9 @@ export class UserService {
   }
 
   postOrFetchUser(address: string) {
-    return this.httpClient.post<User>(`${this._url}/users`, {address: address})
-    .pipe(tap((user) => this._user.set(user)));
+    return this.httpClient
+      .post<User>(`${this._url}/users`, { address: address })
+      .pipe(tap((user) => this._user.set(user)));
   }
 
   get currentUser() {

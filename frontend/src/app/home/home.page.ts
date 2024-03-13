@@ -15,6 +15,7 @@ import { User, UserService } from '../services/user.service';
 import { WalletService } from '../services/wallet.service';
 import Web3 from 'web3';
 import FundraiserContract from '../../../contracts/Fundraiser.json';
+import { LoadingController } from '@ionic/angular/standalone';
 
 const projectId = environment.wc_key;
 
@@ -73,7 +74,8 @@ export class HomePage {
   constructor(
     private couponService: CouponService,
     private userService: UserService,
-    private walletService: WalletService
+    private walletService: WalletService,
+    private loadingController: LoadingController
   ) {
     this.couponService.getCoupons().subscribe((data) => {
       this.coupons = data;
@@ -93,23 +95,18 @@ export class HomePage {
     return this.modal.open();
   }
 
-  async donate() {
-    const amount = '0.0025';
-
+  async donate(coupon: Coupon) {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    const amount = coupon.price.toString();
     const web3 = new Web3(this.modal.getWalletProvider());
 
     const contractABI = FundraiserContract.abi;
     const contractAddress = '0xF014bbE6660B2F2db0151A95d5a391842284ec5d';
     const contract = new web3.eth.Contract(contractABI, contractAddress);
     const fromAddress = this.modal.getAddress();
-
-    const estimatedGas = await web3.eth.estimateGas({
-      from: fromAddress,
-      to: contractAddress,
-      data: contract.methods['donate'](amount).encodeABI(),
-    });
-
-    console.log('estimatedGas: ', estimatedGas);
+    const currentUser = this.currentUser;
+    const couponService = this.couponService;
 
     contract.methods['donate']()
       .send({
@@ -119,6 +116,10 @@ export class HomePage {
       })
       .then(function (receipt) {
         console.log(receipt);
+        loading.dismiss();
+        if (currentUser) {
+          couponService.createUserCoupon(coupon.id, currentUser.id).subscribe();
+        }
       });
   }
 

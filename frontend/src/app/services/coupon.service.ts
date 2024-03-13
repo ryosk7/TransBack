@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 export type Coupon = {
   id: number;
@@ -8,7 +8,7 @@ export type Coupon = {
   thumbnail: string;
   price: string;
   organization_name: string;
-}
+};
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,17 @@ export class CouponService {
     return this.httpClient.get<Coupon[]>(`${this.url}/coupons`);
   }
 
-  getUserCoupons() {
-    return this.httpClient.get<Coupon[]>(`${this.url}/user_coupons`);
+  myCoupons(user_id: number) {
+    let params = new HttpParams().set('user_id', user_id);
+    return this.httpClient.get<Coupon[]>(`${this.url}/user_coupons`, {
+      params,
+    });
+  }
+
+  createUserCoupon(couponId: number, userId: number) {
+    return this.httpClient.post(`${this.url}/user_coupons`, {
+      coupon_id: couponId,
+      user_id: userId,
+    });
   }
 }
