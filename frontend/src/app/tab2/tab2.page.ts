@@ -7,7 +7,7 @@ import {
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Coupon, CouponService } from '../services/coupon.service';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers';
 import { User, UserService } from '../services/user.service';
 import { WalletService } from '../services/wallet.service';

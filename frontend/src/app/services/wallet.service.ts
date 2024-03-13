@@ -1,5 +1,5 @@
 import { signal, Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers';
 import { UserService } from './user.service';
 import { Observable, concatMap, map } from 'rxjs';
