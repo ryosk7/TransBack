@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for transback-web3 on 2024-03-13T17:55:42+09:00
+# fly.toml app configuration file generated for transback-web3-server on 2024-03-31T03:41:16+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'transback-web3'
+app = 'transback-web3-server'
 primary_region = 'nrt'
 console_command = '/rails/bin/rails console'
 
@@ -39,7 +39,3 @@ console_command = '/rails/bin/rails console'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-
-[[statics]]
-  guest_path = '/rails/public'
-  url_prefix = '/'
