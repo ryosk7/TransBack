@@ -1,6 +1,8 @@
 class Coupon < ApplicationRecord
   belongs_to :organization
 
+  validates :address, uniqueness: true, presence: true
+
   before_create do |coupon|
     coupon.default_settings
   end
