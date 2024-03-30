@@ -38,6 +38,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: transback
+  database: transback_production
   username: transback_user
   password: <%= ENV['DB_PASSWORD'] %>
