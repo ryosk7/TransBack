@@ -25,9 +25,11 @@ export class SuccessModalPage {
   ) {
     this.coupon = this.navParams.data['coupon'];
     const jsConfetti = new JSConfetti();
-    jsConfetti.addConfetti({
-      emojis: ['🎉'],
-    });
+    setInterval(() => {
+      jsConfetti.addConfetti({
+        emojis: ['🎉'],
+      });
+    }, 2500);
   }
 
   closeModal() {
