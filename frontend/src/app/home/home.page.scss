@@ -131,7 +131,7 @@
       &__coupon-donate {
         display: flex;
         justify-content: space-between;
-        align-items: end;
+        align-items: flex-end;
 
         &__price {
           color: var(--text-accent, #fc581c);

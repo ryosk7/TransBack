@@ -7,6 +7,7 @@ import {
 } from '@ionic/angular/standalone';
 import { IonIcon } from '@ionic/angular/standalone';
 import { Coupon } from '../services/coupon.service';
+import JSConfetti from 'js-confetti';
 
 @Component({
   selector: 'app-success-modal',
@@ -23,6 +24,10 @@ export class SuccessModalPage {
     private navParams: NavParams
   ) {
     this.coupon = this.navParams.data['coupon'];
+    const jsConfetti = new JSConfetti();
+    jsConfetti.addConfetti({
+      emojis: ['🎉'],
+    });
   }
 
   closeModal() {
