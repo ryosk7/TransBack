@@ -9,7 +9,8 @@ import {
   IonLabel,
   IonModal,
   IonList,
-  IonButton
+  IonButton,
+  ModalController,
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Coupon, CouponService } from '../services/coupon.service';
@@ -17,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers';
 import { User, UserService } from '../services/user.service';
 import { WalletService } from '../services/wallet.service';
+import { CouponModalPage } from '../coupon-modal/coupon-modal.page';
 
 const projectId = environment.wc_key;
 
@@ -53,8 +55,7 @@ const metadata = {
     IonLabel,
     IonItem,
     IonList,
-    IonButton
-    
+    IonButton,
   ],
 })
 export class Tab2Page {
@@ -71,7 +72,8 @@ export class Tab2Page {
   constructor(
     private couponService: CouponService,
     private userService: UserService,
-    private walletService: WalletService
+    private walletService: WalletService,
+    private modalController: ModalController
   ) {
     this.currentUser = this.userService.currentUser();
     if (!this.currentUser) {
@@ -113,5 +115,16 @@ export class Tab2Page {
     } else {
       return null;
     }
+  }
+
+  async presentCouponModal(coupon: Coupon) {
+    const modal = await this.modalController.create({
+      component: CouponModalPage,
+      cssClass: 'coupon-modal',
+      componentProps: {
+        coupon: coupon,
+      },
+    });
+    return await modal.present();
   }
 }

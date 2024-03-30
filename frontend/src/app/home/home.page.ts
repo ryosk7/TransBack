@@ -17,7 +17,7 @@ import { WalletService } from '../services/wallet.service';
 import Web3 from 'web3';
 import FundraiserContract from '../../../contracts/Fundraiser.json';
 import { LoadingController } from '@ionic/angular/standalone';
-import { SuccessPage } from '../success/success.page';
+import { SuccessModalPage } from '../success-modal/success-modal.page';
 
 const cc = require('cryptocompare');
 
@@ -97,10 +97,13 @@ export class HomePage {
     });
   }
 
-  async presentModal() {
+  async presentModal(coupon: Coupon) {
     const modal = await this.modalController.create({
-      component: SuccessPage,
+      component: SuccessModalPage,
       cssClass: 'success-modal',
+      componentProps: {
+        coupon: coupon,
+      },
     });
     return await modal.present();
   }
@@ -172,7 +175,7 @@ export class HomePage {
             this.couponService
               .createUserCoupon(coupon.id, donateUser.id)
               .subscribe();
-            this.presentModal();
+            this.presentModal(coupon);
           }
         });
     } catch (error) {

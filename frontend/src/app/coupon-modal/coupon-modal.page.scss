@@ -1,0 +1,49 @@
+.modal-group {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  &__coupon-image {
+    margin-top: 3.17rem;
+
+    img {
+      width: 11.73031rem;
+      border-radius: 0.49894rem;
+    }
+  }
+  &__coupon-description {
+    font-family: Inter;
+    font-size: 0.90506rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 143%; /* 1.29425rem */
+    letter-spacing: 0.04525rem;
+    margin-top: 0.9rem;
+    width: 15.13431rem;
+    text-align: left;
+  }
+  &__coupon-code {
+    color: #000;
+    font-family: Inter;
+    font-size: 1.45rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 0.625rem;
+    background: #f2f2f2;
+    padding: 0.63rem 2.12rem;
+    margin-top: 3.61rem;
+  }
+}
+
+.close-button {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 2.69rem;
+
+  img {
+    width: 5.375rem;
+    height: 5.375rem;
+  }
+}
