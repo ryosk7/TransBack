@@ -1,0 +1,41 @@
+.modal-group {
+  display: grid;
+  text-align: center;
+
+  &__coupon-image {
+    margin-top: 3.17rem;
+
+    img {
+      width: 11.73031rem;
+      border-radius: 0.49894rem;
+    }
+  }
+  &__coupon-description {
+  }
+  &__thx-message {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 2.11rem;
+  }
+  &__thx-description {
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 1.67rem 3rem 0;
+  }
+  &__coupon-message {
+    margin-top: 3.67rem;
+
+    &__message {
+      font-size: 0.7rem;
+    }
+  }
+  &__close-button {
+    margin-top: 2.69rem;
+
+    img {
+      width: 5.375rem;
+      height: 5.375rem;
+    }
+  }
+}
