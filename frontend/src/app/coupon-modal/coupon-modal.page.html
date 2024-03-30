@@ -1,0 +1,17 @@
+<ion-content>
+  <div class="modal-group">
+    <div class="modal-group__coupon-image">
+      <img [src]="coupon?.thumbnail" alt="coupon-thumbnail" />
+    </div>
+    <div class="modal-group__coupon-description">{{ coupon?.detail }}</div>
+    <div class="modal-group__coupon-code">{{ 'D38FI9' }}</div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="close-button" (click)="closeModal()" tappable>
+    <img
+      src="../../assets/icon/close-circle-outline.svg"
+      alt="close-modal-button"
+    />
+  </div>
+</ion-footer>

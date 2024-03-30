@@ -1,6 +1,7 @@
 .modal-group {
   display: grid;
-  text-align: center;
+  justify-items: center;
+  align-items: center;
 
   &__coupon-image {
     margin-top: 3.17rem;
@@ -11,6 +12,15 @@
     }
   }
   &__coupon-description {
+    font-family: Inter;
+    font-size: 0.90506rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 143%; /* 1.29425rem */
+    letter-spacing: 0.04525rem;
+    margin-top: 0.9rem;
+    width: 15.13431rem;
+    text-align: left;
   }
   &__thx-message {
     font-size: 1.8rem;
@@ -25,17 +35,23 @@
   }
   &__coupon-message {
     margin-top: 3.67rem;
+    display: flex;
+    gap: 0.4rem;
 
     &__message {
       font-size: 0.7rem;
     }
   }
-  &__close-button {
-    margin-top: 2.69rem;
+}
 
-    img {
-      width: 5.375rem;
-      height: 5.375rem;
-    }
+.close-button {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 2.69rem;
+
+  img {
+    width: 5.375rem;
+    height: 5.375rem;
   }
 }
