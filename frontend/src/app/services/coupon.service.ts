@@ -8,6 +8,7 @@ export type Coupon = {
   detail: string;
   thumbnail: string;
   price: number;
+  code: string;
   organization_name: string;
 };
 
