@@ -1,0 +1,27 @@
+<div class="modal-group">
+  <div class="modal-group__coupon-image">
+    <img [src]="'assets/images/coupon-image-1.png'" alt="coupon-thumbnail" />
+  </div>
+  <div class="modal-group__coupon-description"></div>
+  <div class="modal-group__thx-message">Thanks!!😁</div>
+  <div class="modal-group__thx-description">
+    寄付のお礼としてクーポンを贈呈しました🎉
+    <br />
+    <br />
+    あなたの寄付はNPO法人YamoriClubの活動や、活動に参加する協力企業の活動費として利用されます。
+  </div>
+  <div class="modal-group__coupon-message">
+    <div class="modal-group__coupon-message__account-tab-icon">
+      <ion-icon name="person"></ion-icon>
+    </div>
+    <div class="modal-group__coupon-message__message">
+      アカウントページからクーポンを確認できます。
+    </div>
+  </div>
+  <div class="modal-group__close-button" (click)="closeModal()" tappable>
+    <img
+      src="../../assets/icon/close-circle-outline.svg"
+      alt="close-modal-button"
+    />
+  </div>
+</div>

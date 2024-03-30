@@ -5,6 +5,7 @@ import {
   IonTitle,
   IonContent,
   IonIcon,
+  ModalController,
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Coupon, CouponService } from '../services/coupon.service';
@@ -16,8 +17,9 @@ import { WalletService } from '../services/wallet.service';
 import Web3 from 'web3';
 import FundraiserContract from '../../../contracts/Fundraiser.json';
 import { LoadingController } from '@ionic/angular/standalone';
+import { SuccessPage } from '../success/success.page';
 
-const cc = require('cryptocompare')
+const cc = require('cryptocompare');
 
 const projectId = environment.wc_key;
 
@@ -62,14 +64,15 @@ export class HomePage {
   isConnected = false;
   address = '';
   currentUser: User | null = null;
-  remainingBalance = "---";
+  remainingBalance = '---';
   jpyToEthRate = null;
 
   constructor(
     private couponService: CouponService,
     private userService: UserService,
     private walletService: WalletService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private modalController: ModalController
   ) {
     console.log('production?: ', environment.production);
     this.couponService.getCoupons().subscribe((data) => {
@@ -90,8 +93,16 @@ export class HomePage {
     });
 
     this.convertJPYtoETH(jpyAmount).then((ethAmount) => {
-      this.remainingBalance = ethAmount.toFixed(2) 
+      this.remainingBalance = ethAmount.toFixed(2);
     });
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SuccessPage,
+      cssClass: 'success-modal',
+    });
+    return await modal.present();
   }
 
   openConnectModal() {
@@ -121,11 +132,11 @@ export class HomePage {
   }
 
   exchangeRate(jpyAmount: number) {
-    let amount = "---";
+    let amount = '---';
     if (this.jpyToEthRate) {
       amount = (jpyAmount / this.jpyToEthRate).toFixed(4);
     }
-    return amount
+    return amount;
   }
 
   async donate(coupon: Coupon) {
@@ -133,32 +144,37 @@ export class HomePage {
     await loading.present();
     try {
       const amount = coupon.price;
-      const ethAmount = await this.convertJPYtoETH(amount)
+      const ethAmount = await this.convertJPYtoETH(amount);
       const web3 = new Web3(this.modal.getWalletProvider());
 
       const contractABI = FundraiserContract.abi;
       const contractAddress = '0xF014bbE6660B2F2db0151A95d5a391842284ec5d';
-      const walletProvider = this.modal.getWalletProvider()
-      if (!walletProvider) { return }
-      const ethersProvider = new BrowserProvider(walletProvider)
-      const signer = await ethersProvider.getSigner()
+      const walletProvider = this.modal.getWalletProvider();
+      if (!walletProvider) {
+        return;
+      }
+      const ethersProvider = new BrowserProvider(walletProvider);
+      const signer = await ethersProvider.getSigner();
       const contract = new Contract(contractAddress, contractABI, signer);
 
-      const couponService = this.couponService;
-      const userService = this.userService;
-
-      contract.getFunction('donate').send({
-        from: this.modal.getAddress(),
-        value: web3.utils.toWei(ethAmount, 'ether'),
-        gas: '650000',
-      }).then(function (receipt) {
-        console.log(receipt);
-        loading.dismiss();
-        const donateUser = userService.currentUser()
-        if (donateUser) {
-          couponService.createUserCoupon(coupon.id, donateUser.id).subscribe();
-        }
-      })
+      contract
+        .getFunction('donate')
+        .send({
+          from: this.modal.getAddress(),
+          value: web3.utils.toWei(ethAmount, 'ether'),
+          gas: '650000',
+        })
+        .then((receipt) => {
+          console.log(receipt);
+          loading.dismiss();
+          const donateUser = this.userService.currentUser();
+          if (donateUser) {
+            this.couponService
+              .createUserCoupon(coupon.id, donateUser.id)
+              .subscribe();
+            this.presentModal();
+          }
+        });
     } catch (error) {
       console.error(error);
       loading.dismiss();
