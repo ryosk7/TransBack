@@ -6,11 +6,15 @@
 個人は NPO 法人に対して寄付をしてクーポンコードを獲得、NPO 法人は企業に対して、集金したものを送金。こうすることで、非課税で年間 110 万円分のクーポンを獲得することができてしまいます。
 食事やサービスなど、さまざまなクーポンコードと変換できる社会を作りたいです。
 
+[詳しい説明](https://github.com/ryosk7/TransBack/blob/main/NEMTUS_HACKATHON_TransBack.pdf)
+
 Even if your assets increase and you feel like you're getting rich, when you convert them into yen, you have to pay income tax and file a tax return. We created this app based on the idea of why you want to convert your assets into yen.
 Individuals donate to NPOs and get a coupon code, and NPOs remit the collected money to companies. In this way, they can acquire coupons worth JPY 1.1 million a year tax-free.
 We want to create a society where people can convert the coupon codes into various coupon codes for meals, services, etc.
 
 Translated with DeepL.com (free version)
+
+[More Detail](https://github.com/ryosk7/TransBack/blob/main/NEMTUS_HACKATHON_TransBack.pdf)
 
 ## Setup
 
