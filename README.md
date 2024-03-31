@@ -12,8 +12,6 @@ Even if your assets increase and you feel like you're getting rich, when you con
 Individuals donate to NPOs and get a coupon code, and NPOs remit the collected money to companies. In this way, they can acquire coupons worth JPY 1.1 million a year tax-free.
 We want to create a society where people can convert the coupon codes into various coupon codes for meals, services, etc.
 
-Translated with DeepL.com (free version)
-
 [More Detail](https://github.com/ryosk7/TransBack/blob/main/NEMTUS_HACKATHON_TransBack.pdf)
 
 
